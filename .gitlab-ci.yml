@@ -23,6 +23,7 @@ test:
     - pip3 install -r requirements.txt
     - export MESSAGEBUS_URI="pyamqp://user:password@rabbitmq:5672//"
     - make check
+    - for i in `seq 1 60`; do curl -s -o /dev/null -u user:password http://rabbitmq:15672/api/vhosts && break || true; sleep 1; done
     - make coverage
     - mkdir -p tests/unit-coverage && find . -name 'coverage.xml' -exec cp --parents {} ./tests/unit-coverage \;
     - tar -cvf $CI_PROJECT_DIR/unit-coverage.tar tests/unit-coverage
