@@ -1,0 +1,9 @@
+version: '2'
+services:
+  tests:
+    image: 'canyan/rating-agent:tests'
+    command: ["sleep", "3600"]
+    volumes:
+    - .:/src
+    environment:
+    - MESSAGEBUS_URI=pyamqp://user:password@rabbitmq:5672//

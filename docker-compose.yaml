@@ -7,5 +7,3 @@ services:
     - "15672:15672"
     environment:
     - RABBITMQ_PASSWORD=password
-    volumes:
-    - ./data/rabbitmq:/bitnami/rabbitmq
