@@ -57,7 +57,7 @@ def engine_fake_method():
     return _method
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def engine():
     from rating_agent.enums import MethodName
     from rating_agent.services import bus as bus_service
