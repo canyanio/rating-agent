@@ -14,11 +14,14 @@ before_script:
 test:
   stage: test
   services:
-    - mongo:4.0
+    - name: bitnami/rabbitmq:3.7
+      alias: rabbitmq
+  variables:
+    RABBITMQ_PASSWORD: "password"
   script:
     - apk add build-base gcc python3-dev musl-dev libffi-dev libstdc++ make
     - pip3 install -r requirements.txt
-    - export MONGODB_URI="mongodb://mongo"
+    - export MESSAGEBUS_URI="pyamqp://user:password@rabbitmq:5672//"
     - make check
     - make coverage
     - mkdir -p tests/unit-coverage && find . -name 'coverage.xml' -exec cp --parents {} ./tests/unit-coverage \;
