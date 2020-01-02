@@ -25,7 +25,6 @@ setup(
         "aio-pika>=6.3.0",
         "fastapi>=0.42.0",
         "graphene>=2.1.8",
-        "kombu>=4.6.4",
         "python-dateutil",
         "pytz",
         "requests",
