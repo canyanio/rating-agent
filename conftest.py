@@ -52,6 +52,8 @@ def engine_fake_method():
             item = EngineTestingQueue.get_nowait()
         except Empty:
             return {}
+        if isinstance(item, Exception):
+            raise item
         return item
 
     return _method

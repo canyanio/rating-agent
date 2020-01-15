@@ -13,7 +13,7 @@ async def authorization(
         await bus.rpc_call(
             method=MethodName.AUTHORIZATION.value,
             expiration=RPC_CALL_EXPIRATION,
-            kwargs={'request': request},
+            kwargs={'request': request.dict()},
         )
         or {}
     )
@@ -27,7 +27,7 @@ async def begin_transaction(
         await bus.rpc_call(
             method=MethodName.BEGIN_TRANSACTION.value,
             expiration=RPC_CALL_EXPIRATION,
-            kwargs={'request': request},
+            kwargs={'request': request.dict()},
         )
         or {}
     )
@@ -41,7 +41,7 @@ async def end_transaction(
         await bus.rpc_call(
             method=MethodName.END_TRANSACTION.value,
             expiration=RPC_CALL_EXPIRATION,
-            kwargs={'request': request},
+            kwargs={'request': request.dict()},
         )
         or {}
     )
@@ -55,7 +55,7 @@ async def rollback_transaction(
         await bus.rpc_call(
             method=MethodName.ROLLBACK_TRANSACTION.value,
             expiration=RPC_CALL_EXPIRATION,
-            kwargs={'request': request},
+            kwargs={'request': request.dict()},
         )
         or {}
     )
@@ -69,7 +69,7 @@ async def record_transaction(
         await bus.rpc_call(
             method=MethodName.RECORD_TRANSACTION.value,
             expiration=RPC_CALL_EXPIRATION,
-            kwargs={'request': request},
+            kwargs={'request': request.dict()},
         )
         or {}
     )
