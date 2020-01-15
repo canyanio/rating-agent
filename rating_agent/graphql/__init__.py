@@ -9,6 +9,13 @@ from .agent import (
 )
 
 
+class Query(graphene.ObjectType):
+    version = graphene.Int()
+
+    def resolve_version(self, *args, **kw):
+        return 1
+
+
 class Mutations(graphene.ObjectType):
     authorization = authorization.Field(name="authorization")
     beginTransaction = beginTransaction.Field(name="beginTransaction")
@@ -17,4 +24,4 @@ class Mutations(graphene.ObjectType):
     recordTransaction = recordTransaction.Field(name="recordTransaction")
 
 
-schema = graphene.Schema(mutation=Mutations, auto_camelcase=False)
+schema = graphene.Schema(query=Query, mutation=Mutations, auto_camelcase=False)
