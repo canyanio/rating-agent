@@ -16,7 +16,13 @@ def test_api_end_transaction_rest(client, engine):
         ),
     )
     assert response.status_code == 200
-    assert response.json() == {'ok': True}
+    assert response.json() == {
+        'ok': True,
+        'tenant': 'default',
+        'transaction_tag': '100',
+        'account_tag': '1000',
+        'destination_account_tag': '1001',
+    }
 
 
 def test_api_end_transaction_graphql(client, engine):
@@ -34,10 +40,22 @@ mutation {
         destination_account_tag: "1001"
     ) {
         ok
+        tenant
+        transaction_tag
+        account_tag
+        destination_account_tag
     }
 }"""
         },
     )
     assert response.status_code == 200
-    expected = {"endTransaction": {"ok": True}}
+    expected = {
+        "endTransaction": {
+            "ok": True,
+            "tenant": "default",
+            "transaction_tag": "100",
+            "account_tag": "1000",
+            "destination_account_tag": "1001",
+        }
+    }
     assert response.json()["data"] == expected
