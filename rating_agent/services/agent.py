@@ -17,7 +17,13 @@ async def authorization(
         )
         or {}
     )
-    return schema.AuthorizationResponse(**response)
+    return schema.AuthorizationResponse(
+        tenant=request.tenant,
+        transaction_tag=request.transaction_tag,
+        account_tag=request.account_tag,
+        destination_account_tag=request.destination_account_tag,
+        **response
+    )
 
 
 async def begin_transaction(
@@ -31,7 +37,13 @@ async def begin_transaction(
         )
         or {}
     )
-    return schema.BeginTransactionResponse(**response)
+    return schema.BeginTransactionResponse(
+        tenant=request.tenant,
+        transaction_tag=request.transaction_tag,
+        account_tag=request.account_tag,
+        destination_account_tag=request.destination_account_tag,
+        **response
+    )
 
 
 async def end_transaction(
@@ -45,7 +57,13 @@ async def end_transaction(
         )
         or {}
     )
-    return schema.EndTransactionResponse(**response)
+    return schema.EndTransactionResponse(
+        tenant=request.tenant,
+        transaction_tag=request.transaction_tag,
+        account_tag=request.account_tag,
+        destination_account_tag=request.destination_account_tag,
+        **response
+    )
 
 
 async def rollback_transaction(
@@ -59,7 +77,13 @@ async def rollback_transaction(
         )
         or {}
     )
-    return schema.RollbackTransactionResponse(**response)
+    return schema.RollbackTransactionResponse(
+        tenant=request.tenant,
+        transaction_tag=request.transaction_tag,
+        account_tag=request.account_tag,
+        destination_account_tag=request.destination_account_tag,
+        **response
+    )
 
 
 async def record_transaction(
@@ -73,4 +97,10 @@ async def record_transaction(
         )
         or {}
     )
-    return schema.RecordTransactionResponse(**response)
+    return schema.RecordTransactionResponse(
+        tenant=request.tenant,
+        transaction_tag=request.transaction_tag,
+        account_tag=request.account_tag,
+        destination_account_tag=request.destination_account_tag,
+        **response
+    )

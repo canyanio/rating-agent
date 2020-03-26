@@ -72,6 +72,10 @@ class BeginTransactionResponse(graphene.ObjectType):
     """Begin transaction response"""
 
     ok = graphene.Boolean()
+    tenant = graphene.ID(default_value='default')
+    transaction_tag = graphene.String(required=True)
+    account_tag = graphene.String()
+    destination_account_tag = graphene.String()
 
 
 class beginTransaction(graphene.Mutation):
@@ -119,6 +123,10 @@ class EndTransactionResponse(graphene.ObjectType):
     """End transaction response"""
 
     ok = graphene.Boolean()
+    tenant = graphene.ID(default_value='default')
+    transaction_tag = graphene.String(required=True)
+    account_tag = graphene.String()
+    destination_account_tag = graphene.String()
 
 
 class endTransaction(graphene.Mutation):
@@ -160,6 +168,10 @@ class RollbackTransactionResponse(graphene.ObjectType):
     """Rollback transaction response"""
 
     ok = graphene.Boolean()
+    tenant = graphene.ID(default_value='default')
+    transaction_tag = graphene.String(required=True)
+    account_tag = graphene.String()
+    destination_account_tag = graphene.String()
 
 
 class rollbackTransaction(graphene.Mutation):
@@ -198,6 +210,10 @@ class RecordTransactionResponse(graphene.ObjectType):
     """Record transaction response"""
 
     ok = graphene.Boolean()
+    tenant = graphene.ID(default_value='default')
+    transaction_tag = graphene.String(required=True)
+    account_tag = graphene.String()
+    destination_account_tag = graphene.String()
 
 
 class recordTransaction(graphene.Mutation):

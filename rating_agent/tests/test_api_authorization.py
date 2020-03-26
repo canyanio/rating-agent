@@ -17,15 +17,15 @@ def test_api_authorization_rest(client, engine):
     )
     assert response.status_code == 200
     assert response.json() == {
-        'account_tag': None,
+        'account_tag': '1000',
         'authorized': True,
         'authorized_destination': False,
         'balance': 0,
         'carriers': [],
-        'destination_account_tag': None,
+        'destination_account_tag': '1001',
         'max_available_units': 0,
         'tenant': 'default',
-        'transaction_tag': None,
+        'transaction_tag': '100',
         'unauthorized_account_reason': None,
         'unauthorized_account_tag': None,
         'unauthorized_destination_reason': None,
