@@ -49,6 +49,10 @@ class BeginTransactionResponse(BaseModel):
     """Begin transaction response"""
 
     ok: bool = False
+    tenant: str = 'default'
+    transaction_tag: str
+    account_tag: Optional[str] = None
+    destination_account_tag: Optional[str] = None
 
 
 class EndTransactionRequest(BaseModel):
@@ -65,6 +69,10 @@ class EndTransactionResponse(BaseModel):
     """Begin transaction response"""
 
     ok: bool = False
+    tenant: str = 'default'
+    transaction_tag: str
+    account_tag: Optional[str] = None
+    destination_account_tag: Optional[str] = None
 
 
 class RollbackTransactionRequest(BaseModel):
@@ -80,6 +88,10 @@ class RollbackTransactionResponse(BaseModel):
     """Begin transaction response"""
 
     ok: bool = False
+    tenant: str = 'default'
+    transaction_tag: str
+    account_tag: Optional[str] = None
+    destination_account_tag: Optional[str] = None
 
 
 class RecordTransactionRequest(BaseModel):
@@ -102,3 +114,7 @@ class RecordTransactionResponse(BaseModel):
     """Record transaction response"""
 
     ok: bool = False
+    tenant: str = 'default'
+    transaction_tag: str
+    account_tag: Optional[str] = None
+    destination_account_tag: Optional[str] = None

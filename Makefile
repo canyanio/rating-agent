@@ -1,3 +1,5 @@
+docker_image = canyan/rating-agent
+
 .PHONY:
 venv:
 	virtualenv -p python3 venv --no-site-packages
@@ -63,4 +65,16 @@ agent-dev:
 
 .PHONY: dockerfile
 dockerfile:
-	docker build -t canyan/rating-agent:latest .
+	docker build -t $(docker_image):master .
+
+.PHONY: dockerfile-tests
+dockerfile-tests:
+	docker build -t $(docker_image):tests -f Dockerfile.tests .
+
+.PHONY: docker-start
+docker-start:
+	docker-compose -f docker-compose.yaml -f docker-compose.tests.yaml up -d
+
+.PHONY: docker-stop
+docker-stop:
+	docker-compose -f docker-compose.yaml -f docker-compose.tests.yaml down
