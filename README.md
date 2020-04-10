@@ -67,7 +67,7 @@ make setup
 
 You need to have RabbitMQ now running and then you can run the Agent with:
 ```
-make engine
+make agent
 ```
 
 
