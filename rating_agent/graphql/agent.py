@@ -1,6 +1,7 @@
 import graphene  # type: ignore
 
 from datetime import datetime
+from typing import List
 
 from graphene.types.resolver import dict_resolver  # type: ignore
 
@@ -36,7 +37,9 @@ class authorization(graphene.Mutation):
         account_tag = graphene.String()
         destination_account_tag = graphene.String()
         source = graphene.String()
+        source_ip = graphene.String()
         destination = graphene.String()
+        carrier_ip = graphene.String()
         timestamp_auth = graphene.DateTime()
 
     class Meta:
@@ -52,7 +55,10 @@ class authorization(graphene.Mutation):
         account_tag: str = None,
         destination_account_tag: str = None,
         source: str = None,
+        source_ip: str = None,
         destination: str = None,
+        carrier_ip: str = None,
+        tags: List[str] = [],
         timestamp_auth: datetime = None,
     ) -> schema.AuthorizationResponse:
         bus = bus_service.get(info.context["request"])
@@ -62,7 +68,10 @@ class authorization(graphene.Mutation):
             account_tag=account_tag,
             destination_account_tag=destination_account_tag,
             source=source,
+            source_ip=source_ip,
             destination=destination,
+            carrier_ip=carrier_ip,
+            tags=tags,
             timestamp_auth=timestamp_auth,
         )
         return await service.authorization(request, bus)
@@ -87,7 +96,10 @@ class beginTransaction(graphene.Mutation):
         account_tag = graphene.String()
         destination_account_tag = graphene.String()
         source = graphene.String()
+        source_ip = graphene.String()
         destination = graphene.String()
+        carrier_ip = graphene.String()
+        tags = graphene.List(graphene.String)
         timestamp_begin = graphene.DateTime()
 
     class Meta:
@@ -103,7 +115,10 @@ class beginTransaction(graphene.Mutation):
         account_tag: str = None,
         destination_account_tag: str = None,
         source: str = None,
+        source_ip: str = None,
         destination: str = None,
+        carrier_ip: str = None,
+        tags: List[str] = [],
         timestamp_begin: datetime = None,
     ) -> schema.BeginTransactionResponse:
         bus = bus_service.get(info.context["request"])
@@ -225,12 +240,15 @@ class recordTransaction(graphene.Mutation):
         account_tag = graphene.String()
         destination_account_tag = graphene.String()
         source = graphene.String()
+        source_ip = graphene.String()
         destination = graphene.String()
+        carrier_ip = graphene.String()
+        tags = graphene.List(graphene.String)
+        authorized = graphene.Boolean()
+        unauthorized_reason = graphene.String()
         timestamp_auth = graphene.DateTime()
         timestamp_begin = graphene.DateTime()
         timestamp_end = graphene.DateTime()
-        failed = graphene.Boolean()
-        failed_reason = graphene.String()
 
     class Meta:
         default_resolver = dict_resolver
@@ -245,12 +263,15 @@ class recordTransaction(graphene.Mutation):
         account_tag: str = None,
         destination_account_tag: str = None,
         source: str = None,
+        source_ip: str = None,
         destination: str = None,
+        carrier_ip: str = None,
+        tags: List[str] = [],
+        authorized: bool = False,
+        unauthorized_reason: str = None,
         timestamp_auth: datetime = None,
         timestamp_begin: datetime = None,
         timestamp_end: datetime = None,
-        failed: bool = False,
-        failed_reason: str = None,
     ) -> schema.RecordTransactionResponse:
         bus = bus_service.get(info.context["request"])
         request = schema.RecordTransactionRequest(
@@ -259,11 +280,14 @@ class recordTransaction(graphene.Mutation):
             account_tag=account_tag,
             destination_account_tag=destination_account_tag,
             source=source,
+            source_ip=source_ip,
             destination=destination,
+            carrier_ip=carrier_ip,
+            tags=tags,
+            authorized=authorized,
+            unauthorized_reason=unauthorized_reason,
             timestamp_auth=timestamp_auth,
             timestamp_begin=timestamp_auth,
             timestamp_end=timestamp_auth,
-            failed=failed,
-            failed_reason=failed_reason,
         )
         return await service.record_transaction(request, bus)
