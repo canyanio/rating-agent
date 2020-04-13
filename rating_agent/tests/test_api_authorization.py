@@ -26,9 +26,8 @@ def test_api_authorization_rest(client, engine):
         'max_available_units': 0,
         'tenant': 'default',
         'transaction_tag': '100',
-        'unauthorized_account_reason': None,
         'unauthorized_account_tag': None,
-        'unauthorized_destination_reason': None,
+        'unauthorized_reason': None,
     }
 
 

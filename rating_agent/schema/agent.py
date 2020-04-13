@@ -29,8 +29,7 @@ class AuthorizationResponse(BaseModel):
     authorized: bool = False
     authorized_destination: bool = False
     unauthorized_account_tag: Optional[str] = None
-    unauthorized_account_reason: Optional[str] = None
-    unauthorized_destination_reason: Optional[str] = None
+    unauthorized_reason: Optional[str] = None
     max_available_units: int = 0
     balance: int = 0
     carriers: List[str] = []
