@@ -12,7 +12,10 @@ class AuthorizationRequest(BaseModel):
     account_tag: Optional[str] = None
     destination_account_tag: Optional[str] = None
     source: Optional[str] = None
+    source_ip: Optional[str] = None
     destination: Optional[str] = None
+    carrier_ip: Optional[str] = None
+    tags: Optional[List[str]] = None
     timestamp_auth: Optional[datetime] = None
 
 
@@ -41,7 +44,10 @@ class BeginTransactionRequest(BaseModel):
     account_tag: Optional[str] = None
     destination_account_tag: Optional[str] = None
     source: Optional[str] = None
+    source_ip: Optional[str] = None
     destination: Optional[str] = None
+    carrier_ip: Optional[str] = None
+    tags: Optional[List[str]] = None
     timestamp_begin: Optional[datetime] = None
 
 
@@ -102,12 +108,15 @@ class RecordTransactionRequest(BaseModel):
     account_tag: Optional[str] = None
     destination_account_tag: Optional[str] = None
     source: Optional[str] = None
+    source_ip: Optional[str] = None
     destination: Optional[str] = None
+    carrier_ip: Optional[str] = None
+    tags: Optional[List[str]] = None
+    authorized: bool = False
+    unauthorized_reason: Optional[str] = None
     timestamp_auth: Optional[datetime] = None
     timestamp_begin: Optional[datetime] = None
     timestamp_end: Optional[datetime] = None
-    failed: bool = False
-    failed_reason: Optional[str] = None
 
 
 class RecordTransactionResponse(BaseModel):
