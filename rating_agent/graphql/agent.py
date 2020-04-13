@@ -1,7 +1,7 @@
 import graphene  # type: ignore
 
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from graphene.types.resolver import dict_resolver  # type: ignore
 
@@ -57,7 +57,7 @@ class authorization(graphene.Mutation):
         source_ip: str = None,
         destination: str = None,
         carrier_ip: str = None,
-        tags: List[str] = None,
+        tags: Optional[List[str]] = None,
         timestamp_auth: datetime = None,
     ) -> schema.AuthorizationResponse:
         bus = bus_service.get(info.context["request"])
@@ -117,7 +117,7 @@ class beginTransaction(graphene.Mutation):
         source_ip: str = None,
         destination: str = None,
         carrier_ip: str = None,
-        tags: List[str] = None,
+        tags: Optional[List[str]] = None,
         timestamp_begin: datetime = None,
     ) -> schema.BeginTransactionResponse:
         bus = bus_service.get(info.context["request"])
@@ -127,7 +127,10 @@ class beginTransaction(graphene.Mutation):
             account_tag=account_tag,
             destination_account_tag=destination_account_tag,
             source=source,
+            source_ip=source_ip,
             destination=destination,
+            carrier_ip=carrier_ip,
+            tags=tags,
             timestamp_begin=timestamp_begin,
         )
         return await service.begin_transaction(request, bus)
@@ -265,7 +268,7 @@ class recordTransaction(graphene.Mutation):
         source_ip: str = None,
         destination: str = None,
         carrier_ip: str = None,
-        tags: List[str] = None,
+        tags: Optional[List[str]] = None,
         authorized: bool = False,
         unauthorized_reason: str = None,
         timestamp_auth: datetime = None,
